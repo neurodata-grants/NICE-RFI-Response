@@ -1,6 +1,6 @@
 Topic 4: Co-local memory storage and computation:
-• What is the current state of research in the use of co-local memory storage and computation for digital or analog computing systems?
-• Are there existing hardware systems that utilize co-local memory storage and computation? If so, in which application areas and use cases have these been deployed, and what are their performance characteristics?
+* What is the current state of research in the use of co-local memory storage and computation for digital or analog computing systems?
+* Are there existing hardware systems that utilize co-local memory storage and computation? If so, in which application areas and use cases have these been deployed, and what are their performance characteristics?
 
 Data transferring is usually the bottleneck of data-centric
 computation systems. As the advance of processors, the speed gap
