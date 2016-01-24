@@ -1,3 +1,8 @@
+For computer scientists: 
+
+- What is the current state of research in the use of asynchronous computation and/or transient coordination for digital or analog computing systems? 
+- Are there existing hardware systems that utilize asynchronous computation and/or transient coordination? If so, in which application areas and use cases have these been deployed, and what are their performance characteristics?
+
 Asynchronous computation has been commonly used to parallelize many data mining and machine learning algorithms.
 In the context of parallel computing, asynchronous computation removes computation barrier to reduce synchronization
 overhead and increase parallelism to speed up computation. By exposing the latest value of the local computation,
