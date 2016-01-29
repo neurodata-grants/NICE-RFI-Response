@@ -135,7 +135,7 @@ different scales.
 
 \section*{Topic 2: Asynchronous computation}
 
-\subsection{Computer Science}
+\subsection*{Computer Science}
 
 Asynchronous computation helps to parallelize data mining and machine learning
 algorithms. In the context of parallel computing, asynchronous computation
@@ -229,7 +229,7 @@ asynchronous computation to accelerate computation if an algorithm allows.
 
 \section*{Topic 3: Learning}
 
-\subsection{Neuroscience}
+\subsection*{Neuroscience}
 The dynamic coordination of activity is essential for any complex network like
 the brain where multiple nodes or regions are needed to accomplish a particular
 function and these nodes function quasi-independently without a central
@@ -317,7 +317,7 @@ much evidence that neuromodulatory tone sets the operational state of different
 brain structures (e.g. awake/sleeping) and there is emerging evidence that it
 can provide fast modulation of activity.
 
-\subsection{Computer Science}
+\subsection*{Computer Science}
 Advances in optimization and signal processing for sensor data have focused on questions of learning parsimonious representations of signals, identification of salient information. How can we leverage structural data assumptions on phenomena to predict state using as little data as possible? How do we handle uncertainty in the structures or models we assume? What additional measurements should we collect in order to get the largest improvement to our accuracy? Some of the answers to these questions have been explored abstractly, assuming sparse, low-rank, and low-complexity parametric models, or with generic cost functions in online optimization and learning. However, many challenges remain before we may apply these techniques to realtime signal processing for learning systems, including handling time-varying phenomena and managing hierarchical data that arrive at different times and with different levels of uncertainty.
 
 Consider two types of inference algorithms: online learning algorithms, which have optimization formulations and are deemed model-free, and estimation algorithms, which require knowledge of the uncertainty distribution. Contemporary online learning algorithms do not handle time-varying phenomena because of their lack of model inclusion, and classical online estimation algorithms are not robust to model misspecification. Recent work has sought to bridge this gap by introducing online learning with dynamics \cite{hall_online_2013, ledva2015inferring}, which uses collections of dynamical system models to develop estimates. This collection of models can be made up of different types of models of arbitrary form (e.g., linear, nonlinear, time-varying), and the online learning algorithm simultaneously estimates state and selects the model or combination of models that best predicts the state at the next time step. The algorithm is based on mirror descent, one of the most current successful online optimization algorithms, and thus inherits many of its appealing properties. This hybrid approach is well-suited to our problem, in which we may need to represent at least a portion of the underlying system with dynamical system models (that we may learn over time), but those models may be complex and not suited for off-the-shelf estimation techniques like Kalman filtering. Furthermore, we suspect that learning can be improved if we are allowed to manipulate the system to force it to explore states that it may otherwise have not, which is a natural technique humans have to learn in uncertain environments.
@@ -338,7 +338,7 @@ The novel signal processing research we propose herein involves bridging this ga
 
 \section*{Topic 4: Co-local memory storage and computation}
 
-\subsection{Computer Science}
+\subsection*{Computer Science}
 Data transmission is usually the bottleneck of data-centric computation systems.
 As the advance of processors, the speed gap between processors and memory
 storage continues increasing. Co-locating memory storage and computation helps
