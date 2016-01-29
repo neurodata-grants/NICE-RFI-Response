@@ -15,9 +15,14 @@ Many graph processing frameworks such as PowerGraph [3] and FlashGraph [4] suppo
 accelerate computation if an algorithm allows.
 
 Another example of asynchronous computation is gradient descent.
-When we apply gradient descent to some optimization problems, we can update the training parameters asynchrnously
+When we apply gradient descent to some optimization problems, we can update the training parameters asynchronously
 and in a lock-free fashion, if the models are sparse [5] or if the updates are associative and commutative [6].
-In both case, the asynchronous update still guarantees convergence.
+In both cases, the asynchronous update still guarantees convergence [7].
+
+Gradient descent is a workhorse of online algorithms and deep learning networks. 
+Therefore since gradient updates can be performed in parallel asynchronously, the speedups in these 
+important learning problems will be nearly linear with the number of computational elements. 
+
 
 [1] [Parallel and Distributed Computation:Numerical Methods](http://dspace.mit.edu/handle/1721.1/3719)
 
@@ -30,3 +35,5 @@ In both case, the asynchronous update still guarantees convergence.
 [5] [HOGWILD!: A Lock-Free Approach to Parallelizing Stochastic Gradient Descent](http://machinelearning.wustl.edu/mlpapers/paper_files/NIPS2011_0485.pdf)
 
 [6] [Project Adam: Building an Efficient and Scalable Deep Learning Training System](http://www.cs.otago.ac.nz/cosc440/readings/osdi14-paper-chilimbi.pdf)
+
+[7] Z. Peng, Y. Xu, M. Yan, and W. Yin, ARock: an Algorithmic Framework for Asynchronous Parallel Coordinate Updates, UCLA CAM Report 15-37, 2015. 
