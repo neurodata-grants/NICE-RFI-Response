@@ -1,0 +1,379 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX Template: Project Titlepage Modified (v 0.1) by rcx
+%
+% Original Source: http://www.howtotex.com
+% Date: February 2014
+% 
+% This is a title page template which be used for articles & reports.
+% 
+% This is the modified version of the original Latex template from
+% aforementioned website.
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{report}
+\usepackage[a4paper]{geometry}
+\usepackage[myheadings]{fullpage}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx, wrapfig, subcaption, setspace, booktabs}
+\usepackage[T1]{fontenc}
+\usepackage[font=small, labelfont=bf]{caption}
+%\usepackage{fourier}
+\usepackage{mathptmx}
+%\usepackage[protrusion=true, expansion=true]{microtype}
+\usepackage[english]{babel}
+\usepackage{sectsty}
+\usepackage{url}
+
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+%\onehalfspacing
+%\setcounter{tocdepth}{5}
+%\setcounter{secnumdepth}{5}
+
+%-------------------------------------------------------------------------------
+% HEADER & FOOTER
+%-------------------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\setlength\headheight{15pt}
+%\fancyhead[L]{Student ID: 1034511}
+%\fancyhead[R]{Anglia Ruskin University}
+%\fancyfoot[R]{Page \thepage\ of \pageref{LastPage}}
+%-------------------------------------------------------------------------------
+% TITLE PAGE
+%-------------------------------------------------------------------------------
+
+\begin{document}
+
+\title{
+\HRule{2pt} \\
+\LARGE \textbf{Response to Request for Information for Neurally Inspired Computing Principles} \\
+Solicitation Number: IARPA-RFI-16-02
+\HRule{2pt} \\ [0.5cm]
+\normalsize \today \vspace*{5\baselineskip}}
+
+\date{}
+
+\author{
+{Laura Balzano}		\\
+girasole@umich.edu	\\
+Department of Electrical Engineering\\
+and Computer Science	\\
+University of Michigan, Ann Arbor
+\and
+{Loren Frank}			\\
+loren@phy.ucsf.edu		\\
+Department of Neuroscience	\\
+University of California, San Francisco
+\and
+{Adam Kepecs}			\\
+kepecs@cshl.edu		\\
+Cold Spring Harbor Laboratory
+\and
+{Theodoros Rekatsinas}				\\
+thodrek@stanford.edu				\\
+Department of Computer Science		\\
+Stanford University
+\and
+{Joshua Vogelstein} 	\\
+jovo@jhu.edu		\\
+Institute for Computational Medicine 	\\
+Department of Biomedical Engineering 	\\
+Johns Hopkins University
+\and
+{Ce Zhang}	\\
+czhang@cs.stanford.edu				\\
+Department of Computer Science		\\
+Stanford University
+\and
+{Da Zheng}	\\
+dzheng5@jhu.edu		\\
+Department of Computer Science \\
+Johns Hopkins University
+} %
+
+\maketitle
+%\tableofcontents
+\newpage
+
+%-------------------------------------------------------------------------------
+% Section title formatting
+\sectionfont{\scshape}
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+% BODY
+%-------------------------------------------------------------------------------
+
+\section*{Executive summary}
+This response addresses the questions on neurally inspired computing principles
+from the perspective of neuroscience and computer science. We address
+the questions in three topics: asynchronous computation, learning and co-local
+memory storage and computation.
+
+In the topic of asynchronous computation, we address the questions from
+the perspective of computer science and focus on parallel computing in graph
+analysis and deep learning. We give examples of actual hardware and software
+systems that utilize this technique to improve parallelization.
+
+In the topic of learning, we address the questions from the perspective of
+both neuroscience and computer science. For neuroscience.
+
+In the topic of co-local memory storage and computation, we address
+the questions from the perspective of computer science and mainly focus on
+data-centric computation systems. We give examples of both software and
+hardware systems that apply this principle to reduce data transmission between
+data source and computation and improve the speed of data processing at
+different scales.
+
+\newpage
+
+\section*{Topic 2: Asynchronous computation}
+
+\subsection{Computer Science}
+
+Asynchronous computation helps to parallelize data mining and machine learning
+algorithms. In the context of parallel computing, asynchronous computation
+overlaps computation and data movement, and removes computation barrier to
+reduce synchronization
+overhead and increase parallelism to speed up computation. By exposing
+the latest value of the local computation, asynchronous computation affects
+convergence in the original computation. Exposing the latest value helps to
+propagate information and may accelerate convergence in some applications;
+however, in other applications, it may waste some computation and network
+transimission and the computation may not even converge. In this RFI, we
+focus on deep learning and graph analysis.
+
+\subsubsection{Deep Learning}
+Deep Learning is a branch of machine learning referring to a family of methods, such as Convolutional Neural Networks (CNNs) and Deep Belief Networks (DBNs), that attempt to model high-level abstractions in data by using multiple computational layers stacked on top of each other. Deep Learning methods can be dated back to early 1980s~\cite{Kunihiko:1980:Book}
+and are heavily influenced by neural systems in the human brain. However, it was not until
+recently that large-scale deep networks with billions of parameters can be trained efficiently~\cite{Dean:2012:NIPS,Krizhevsky:2012:NIPS}. This leap on capability
+on training neural network led to a breakthrough in the quality of Deep Learning approaches~\cite{2014arXiv1409.1556S,Krizhevsky:2012:NIPS,2014arXiv1409.4842S}. In fact all ImageNet winners after 2012 are based on Deep Learning approaches, and convolutional neural network in particular.
+
+This leap in capacity is caused by two technical advancement happening over the last decade.
+First, the advancement of modern hardware, especially GPGPU on commodity servers, provide the capability of serving tens of TFLOPS on a single box. Second, the advancement of {\em asynchronous computation approaches} provide a way to fully take advantage of the computation power provided by these modern hardware devices. These two angles are both
+indispensable for the recent advancement of the capacity in training convolutional neural networks. In this RFI, we focus on the second aspect, that is the asynchronicity aspect.
+
+\paragraph*{Hardware Asynchronicity} Hardware Asynchronicity has long been used by
+system community as a way to {\em hide latencies} between
+computational devices (e.g., GPU) and data movement channels (e.g., network, or 
+memory bus). We call this family of approaches {\em hardware asynchronicity}
+because the answer of the system will be exactly the same with or without asynchronicity
+(cf. statistical asynchronicity in the next paragraph).
+
+\subparagraph*{Single Device} On a single computation device, e.g., GPU, asynchronous scheduling is the standard approach to hide latency of data access to get the full
+computation peak of the GPU. One of such example is the CuDNN library developed
+by NVnidia~\cite{cudnn}, one of the most popular Deep Learning library. In this work,
+asynchronous scheduling is to used to hide the latency between the computation of
+convolution kernels and the {\em lowering} process to prepare data for the convolution kernels. As a result, CuDNN provides one of the fastest implementation available so far
+for computing convolutions, the most time-consuming operation for Deep Learning training.
+
+\subparagraph*{Multiple (Distributed) Devices} In the distributed setting,
+similar ideas of hiding latency via asynchronous computation and data movement.
+For example, in mxnet\footnote{\url{https://mxnet.readthedocs.org/en/latest/distributed_training.html}} one of the most popular distributed implementation of Deep Learning, movement of models from the model server to the computation server are
+executed asynchronously with the computation on the computation server. For example,
+in the forward pass, the computation of layer $i$ happens concurrently with the
+model movement of the layer $i+1$. This allows a significant speed up over a
+non-overlapping synchronous implementation.
+
+\paragraph*{Statistical Asynchronicity} Compared with {\em hardware asynchronicity},
+{\em statistical asynchronicity} pushes the idea of being asynchronous even further
+by taking advantage of the statistical property of machine learning algorithms.
+Statistical asynchronicity often allows more faster execution for each iteration,
+however, might need to run more number of iterations to reach the same quality.
+Despite of this tradeoff, prior arts show that being statistically asynchronous
+is indispensable for achieve high scalability and performance for distributed 
+Deep Learning systems. There are two popular asynchronous schemes.
+
+\subparagraph*{Asynchronous Parameter Server} Parameter servers are one of
+the most popular implementation for asynchronous distributed Deep Learning,
+e.g., Adam, Google Brain, and CMU's Parameter Server~\cite{Dean:2012:NIPS,Chilimbi:2014:OSDI,186214}. The idea there is different workers see a ``staled'' version of
+the gradient. Therefore, this strategy see almost linear speed up in terms of
+throughput in processing the data, however, might have penalty because of the
+staleness. There has been research to try to improve this by bounding
+the staleness~\cite{2013arXiv1312.7869W}, but it is an open problem both empirically and
+theoretically about what is exact penalty function.
+
+\subparagraph*{Hogwild!} Hogwild! is one way to go further along the asynchronous
+direction. Different from parameter server, Hogwild! does not assume the update
+of the model is atomic, therefore, might has racing across workers. The H2O system
+uses Hogwild! for all GPUs appearing on the same machine.\footnote{\url{http://www.h2o.ai/}}
+
+\subsubsection{Graph analysis}
+Graph analysis is another area that recently receives intensive studies in
+data mining. It maps complex relationship in a large volume of high-connected
+data to a simple representation with merely vertices and edges and help us
+to discover "unknown" data patterns. It has a very wide range of applications
+such as cyber security, social network, web search as well as scientific research
+in genomics and neuroscience.
+The hardware asynchronicity shown above is widely applicable for parallel graph
+processing. In addition, graph analysis also allows another type of algorithmic
+asynchronicity.
+
+There are a large set of graph algorithms that allow asynchronous computation
+and guarantees convergence. Maiter \cite{maiter} explores an asynchronous approach
+{\em delta-based accumulative iterative computation}. This approach requires
+computation with distributive and commutative properties and certain initialization.
+Any graph computation that fulfills the requirements guarantee convergence.
+Asynchronous computation always exposes the latest value of local computation
+and actually accelerates information propagation in some graph algorithms.
+As such, graph algorithms such as PageRank and connected component detection
+converges even faster. Many graph processing frameworks such as PowerGraph
+\cite{powergraph} and FlashGraph \cite{flashgraph} support
+asynchronous computation to accelerate computation if an algorithm allows.
+
+\section*{Topic 3: Learning}
+
+\subsection{Neuroscience}
+The dynamic coordination of activity is essential for any complex network like
+the brain where multiple nodes or regions are needed to accomplish a particular
+function and these nodes function quasi-independently without a central
+controller. For instance, if you were asked to switch from writing down what
+you are hearing to what you are smelling, your brain would have to dynamically
+modulate the flow of information between its auditory, olfactory, and motor
+areas, turning off an auditory-motor pathway and turning on an olfactory-motor
+pathway. Information flow must change moment-to-moment as behaviorally required.
+Yet the axonal connections between areas are essentially fixed, and there is no
+a central router or clock signal as in a computer. How then is dynamic routing
+accomplished in the brain? Or to put it another way: What do we know about how
+the massively parallel and asynchronously operating brain coordinate its
+operation?
+
+Here we outline three distinct lines of neuroscience research that provide 
+complementary lines of evidence about how does inter-areal communication can
+occur.
+
+1. Intermittent information push
+
+One possibility is that all signals are transmitted and received and that
+effectiveness is simply a matter of how loudly each upstream area is shouting.
+In this case, higher firing rates in an upstream area over some period of time
+would give that area more influence. This simple scheme may be sufficient to
+explain how hippocampus communications with downstream structures. 
+
+The hippocampus is crucial for adaptive behavior and reversal learning19, and is 
+particularly important in guiding behavior during early learning. During
+exploration of a new place, the ~8 Hz theta rhythm paces activity throughout
+the hippocampus, and individual hippocampal principal neurons (known as "place
+cells") are active in specific subregions of the animal's environment known as
+the cells' place fields. After the experience, the same sequences are often
+replayed, on a compressed timescale, during "sharp-wave ripple" (SWR)
+events. These SWR events last about 50-200 ms and occur frequently during
+both pauses in movement and slow-wave sleep. The presence of SWRs in awake
+states can be linked with the ability to use past experience to guide
+decisions during learning, where these events appear to broadcast
+information about possible future options to areas outside the hippocampus.
+
+Preliminary data from the Frank laboratory shows strong modulation of activity
+in PFC and other neocortical areas, including auditory cortex (15\% modulated).
+These findings are consistent with SWR-triggered BOLD imaging from primates
+and suggest that awake SWR events influence activity widely
+throughout the brain. Importantly, this influence is likely strongest during
+early learning; once tasks are well-learned, SWR rates drop.
+
+2. Communication subspace
+
+Other evidence indicates that firing rates alone do not determine information 
+transmission. The core idea is that the dynamics of a large neural population
+is sometimes best understood as a trajectory in a state-space, where each point 
+corresponds to a unique pattern of activity across the population. The dynamics
+of trajectories can be viewed as the computation performed by the network.
+In a pre-motor region of macaques for example, motor output could be best
+explained not by the sum of population firing rates but rather when
+the trajectory of population rates crossed into a specific subspace6. This
+allows for the separation of motor planning from execution: 
+outside the execution subspace, the summed activity of individual neurons
+cancels, so precortex would not influence motor outputs.
+
+One hypotheses is that brain areas communicate through a smaller set of latent
+or hidden variables that can be extracted from time-varying firing rates of
+the neural population through simple (linear) readouts. These latent variables
+could create a communication subspace, in that any activity patterns falling
+into the respective subspace of one area will be transmitted to (the subspace
+of) the other area, whereas activity patterns outside of the subspace will not
+be transmitted. Thus, the communication subspace would allow a brain area to
+control what information to transmit or when to send it. Preliminary data from
+the Kepecs laboratory shows that the representational space in orbitofrontal
+cortex during decision making is about 10 dimensional, while only ~4 dimensions
+account for ventral striatal representations. The specific dimensions are
+suggestive that communication between these regions occurs in a specialized
+neuronal subspace.
+
+3. Central broadcast
+
+Neuromodulators may be central to coordination, because they have the potential
+to dramatically reconfigure circuits and change their dynamics across the brain.
+They are usually located in central locations in the brain and send projections
+widely across brain regions. For instance, the dopaminergic system (VT/SNc)
+projects across the striatum and frontal cortex, while the cholinergic nucleus
+basalis (NB) projects across all cortical regions. Despite the accepted term
+"modulator", many of these systems can respond extremely fast. For instance,
+cholinergic neurons show that they are able to respond extreme rapidity and
+precision (18+/-2ms latency) to behavioral feedback. In addition, there are
+ionotropic receptors that could lead to rapid downstream effects. There is
+much evidence that neuromodulatory tone sets the operational state of different
+brain structures (e.g. awake/sleeping) and there is emerging evidence that it
+can provide fast modulation of activity.
+
+\subsection{Computer Science}
+Advances in optimization and signal processing for sensor data have focused on questions of learning parsimonious representations of signals, identification of salient information. How can we leverage structural data assumptions on phenomena to predict state using as little data as possible? How do we handle uncertainty in the structures or models we assume? What additional measurements should we collect in order to get the largest improvement to our accuracy? Some of the answers to these questions have been explored abstractly, assuming sparse, low-rank, and low-complexity parametric models, or with generic cost functions in online optimization and learning. However, many challenges remain before we may apply these techniques to realtime signal processing for learning systems, including handling time-varying phenomena and managing hierarchical data that arrive at different times and with different levels of uncertainty.
+
+Consider two types of inference algorithms: online learning algorithms, which have optimization formulations and are deemed model-free, and estimation algorithms, which require knowledge of the uncertainty distribution. Contemporary online learning algorithms do not handle time-varying phenomena because of their lack of model inclusion, and classical online estimation algorithms are not robust to model misspecification. Recent work has sought to bridge this gap by introducing online learning with dynamics \cite{hall_online_2013, ledva2015inferring}, which uses collections of dynamical system models to develop estimates. This collection of models can be made up of different types of models of arbitrary form (e.g., linear, nonlinear, time-varying), and the online learning algorithm simultaneously estimates state and selects the model or combination of models that best predicts the state at the next time step. The algorithm is based on mirror descent, one of the most current successful online optimization algorithms, and thus inherits many of its appealing properties. This hybrid approach is well-suited to our problem, in which we may need to represent at least a portion of the underlying system with dynamical system models (that we may learn over time), but those models may be complex and not suited for off-the-shelf estimation techniques like Kalman filtering. Furthermore, we suspect that learning can be improved if we are allowed to manipulate the system to force it to explore states that it may otherwise have not, which is a natural technique humans have to learn in uncertain environments.
+
+Online learning (or online optimization) algorithms \cite{nesterov1983method,nemirovsky1983problem} offer a way to optimize a cost function that can be decomposed in terms of each incoming data point. Stochastic optimization and incremental optimization are variants (and sometimes the various names are used interchangeably). The core advantage of online learning algorithms is their computational efficiency. Acceleration techniques beginning with \cite{nesterov1983method} have allowed us to guarantee fast convergence, and work such as \cite{nesterov2013gradient,beck2009fast} allows us to apply those to composite cost functions of a smooth cost (such as the $\ell_2$ norm) and a non-smooth regularizer (such as the $\ell_1$ norm). Examples of online learning algorithms include incremental or stochastic gradient, dual averaging, and mirror descent \cite{allen2014novel}.
+
+Classically, an important drawback of online learning algorithms is that, while each iteration can be computed efficiently, they can require many more iterations in order to converge to the true solution. Beginning with \cite{nesterov1983method} and continuing to very recently, acceleration algorithms have been developed to guarantee that the number of iterations required for convergence is on the same order as allowed by second-order methods. These methods have proved to be so fast that the study of online learning has seen a resurgence of activity over the last five years with the application of mirror descent and acceleration methods to convex but non-smooth cost functions. This led to work on acceleration for composite cost functions made up of a smooth cost with a possibly non-smooth regularizer\cite{nesterov2013gradient,beck2009fast}.
+
+Often processing big data requires the assumption of low-dimensional structure, such as sparsity or smoothness of the signal. A trusted approach to incorporate assumptions like this into our optimization problem uses a composite cost function made up of a smooth cost with a regularizer; this has many motivations including maximum likelihood for sparse noise models. However, regularizers that impose such structure are often non-smooth, and so it was only the acceleration methods of \cite{nesterov2013gradient,beck2009fast} that allowed us to accelerate first-order methods for these cost functions.
+
+The analysis of these online methods is done in terms of the ``regret": the cumulative loss of the online algorithm as compared to another method, usually a batch method. This approach is very general and allows us to compare algorithms based on first the number of iterations they require to reach a certain error, and then the complexity per iteration. The techniques have been applied to many sparse and low-rank optimization problems where one wishes to decrease the per-iteration complexity by using first-order methods. This approach, as opposed to quantifying convergence to some true model or model parameters, can therefore be interpreted as a model-free version of filtering or online estimation.
+
+In the case where the data do arise from a particular model, the batch method could be a consistent estimator. This estimator would come with a particular rate (in terms of number of data points required) of convergence to the true model parameters, and we could study whether the online method has the same rate. This is the classical technique of adaptive filtering: the classical techniques of Kalman filters, or least mean squares (LMS) and recursive least squares (RLS) techniques (e.g., for subspace model tracking, see \cite{DelmasCardoso} for LMS and \cite{yang95} for RLS algorithms), are a special case.
+
+Despite its obvious applicability, online learning has rarely been applied to problems where the data are streaming. One reason for this is that streaming data often measure time-varying phenomena, which precludes application of acceleration methods and typical online learning analysis. Some classical methods in adaptive filtering, Kalman filters being the prime example, were designed for a streaming time-varying context when the model dictating the temporal dynamics is known. In neural signal processing, we cannot expect the model to be known or easily parameterized.
+
+The novel signal processing research we propose herein involves bridging this gap between classical filtering with known dynamics and generic optimization with time-invariance assumptions. The only work on this topic can be found in \cite{hall_online_2013, ledva2015inferring}. In the first work, two things are extended to the case of learning with dynamics: (1) the analytical online learning framework for working with data drawn from dynamical models, and (2) the mirror descent algorithm, which is central to the area of online learning; the extension is called Dynamic Mirror Descent (DMD). In the second work, DMD is applied to a problem in power systems where only aggregate measurements of the system are observed, and we must disaggregate the power contribution of different loads on the system. This will be analogous to several problems in neural processing where measured signals are the aggregation of many and yet the brain is still able to disentangle contributions from certain types of signals.
+
+\section*{Topic 4: Co-local memory storage and computation}
+
+\subsection{Computer Science}
+Data transferring is usually the bottleneck of data-centric computation systems.
+As the advance of processors, the speed gap between processors and memory
+storage continues increasing. Co-locating memory storage and computation helps
+to avoid data transferring from being the bottleneck.
+
+At a small scale, there are attempts of co-locating computation in disks or RAM
+to achieve better energy efficiency and reduce data traffic to improve
+performance. For example, ActiveDisk \cite{riedel01, cho13} utilizes on-drive
+processors to
+perform some portions of application computation to exploit larger internal
+memory bandwidth, significantly reduce data traffic and improve performance of
+some data mining tasks. Nanostores \cite{nanostores}, on the other hand, exploits another
+approach that designs a single chip with both non-volatile memory and energy
+efficient compute cores. This design achieves a much more energy-efficient
+systems for many large-scale data analysis tasks. Similarly, IRAM \cite{iram} was an
+attempt of integrating processors and RAM in the same chip to increase memory
+bandwidth and improve energy efficiency.
+
+At a large scale, the same principle is applied to large-scale data analysis in
+commercial data centers. Unlike supercomputers that have separate computation
+nodes and storage nodes, each node in a commercial data center plays the role of
+computation and storage. Large-scale data analysis systems such as Hadoop take
+advantage of this system design and assigns computation to the node where data
+resides. This strategy significantly reduces data transmission between nodes in
+a cluster and allows the software systems to scale to very large clusters with
+commodity hardware.
+
+%-------------------------------------------------------------------------------
+% REFERENCES
+%-------------------------------------------------------------------------------
+\newpage
+%\section*{References}
+%\addcontentsline{toc}{section}{References}
+\bibliographystyle{abbrv}
+\bibliography{NICP}
+
+\end{document}
+
