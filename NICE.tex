@@ -12,6 +12,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[affil-it]{authblk}
+\usepackage{lmodern}
 \usepackage[a4paper]{geometry}
 \usepackage[myheadings]{fullpage}
 \usepackage{fancyhdr}
@@ -45,22 +48,38 @@
 % TITLE PAGE
 %-------------------------------------------------------------------------------
 
+\renewcommand\Authfont{\fontsize{11}{11}\selectfont}
+\renewcommand\Affilfont{\fontsize{11}{11}\itshape}
+
 \begin{document}
 
 \title{
-\HRule{2pt} \\
 \LARGE \textbf{Response to Request for Information for Neurally Inspired Computing Principles} \\
 Solicitation Number: IARPA-RFI-16-02
-\HRule{2pt} \\ [0.5cm]
-\normalsize \today \vspace*{5\baselineskip}}
+}
 
 \date{}
 
 \author{
+{Joshua Vogelstein} 	\\
+jovo@jhu.edu		\\
+Institute for Computational Medicine 	\\
+Department of Biomedical Engineering 	\\
+Johns Hopkins University
+\and
+{Da Zheng}	\\
+dzheng5@jhu.edu		\\
+Department of Computer Science \\
+Johns Hopkins University
+\and
+{Ce Zhang, Theodoros Rekatsinas, Christopher R\'e}	\\
+{czhang, chrismre}@cs.stanford.edu, thodrek@stanford.edu	\\
+Department of Computer Science		\\
+Stanford University
+\and
 {Laura Balzano}		\\
 girasole@umich.edu	\\
-Department of Electrical Engineering\\
-and Computer Science	\\
+Department of Electrical Engineering and Computer Science	\\
 University of Michigan, Ann Arbor
 \and
 {Loren Frank}			\\
@@ -71,27 +90,6 @@ University of California, San Francisco
 {Adam Kepecs}			\\
 kepecs@cshl.edu		\\
 Cold Spring Harbor Laboratory
-\and
-{Theodoros Rekatsinas}				\\
-thodrek@stanford.edu				\\
-Department of Computer Science		\\
-Stanford University
-\and
-{Joshua Vogelstein} 	\\
-jovo@jhu.edu		\\
-Institute for Computational Medicine 	\\
-Department of Biomedical Engineering 	\\
-Johns Hopkins University
-\and
-{Ce Zhang}	\\
-czhang@cs.stanford.edu				\\
-Department of Computer Science		\\
-Stanford University
-\and
-{Da Zheng}	\\
-dzheng5@jhu.edu		\\
-Department of Computer Science \\
-Johns Hopkins University
 } %
 
 \maketitle
@@ -110,7 +108,7 @@ Johns Hopkins University
 \section*{Executive summary}
 This response addresses the questions on neurally inspired computing principles
 from the perspective of neuroscience and computer science. We address
-the questions in three topics: asynchronous computation, learning and co-local
+the questions in three topics: asynchronous computation, learning, and co-local
 memory storage and computation.
 
 In the topic of asynchronous computation, we address the questions from
@@ -119,7 +117,9 @@ analysis and deep learning. We give examples of actual hardware and software
 systems that utilize this technique to improve parallelization.
 
 In the topic of learning, we address the questions from the perspective of
-both neuroscience and computer science. For neuroscience.
+both neuroscience and computer science. For neuroscience, we outline three
+distinct lines of neuroscience research on inter-areal communication in the brain.
+For computer science, 
 
 In the topic of co-local memory storage and computation, we address
 the questions from the perspective of computer science and mainly focus on
@@ -242,11 +242,10 @@ the massively parallel and asynchronously operating brain coordinate its
 operation?
 
 Here we outline three distinct lines of neuroscience research that provide 
-complementary lines of evidence about how does inter-areal communication can
+complementary lines of evidence about how inter-areal communication can
 occur.
 
-1. Intermittent information push
-
+\paragraph*{Intermittent information push}
 One possibility is that all signals are transmitted and received and that
 effectiveness is simply a matter of how loudly each upstream area is shouting.
 In this case, higher firing rates in an upstream area over some period of time
@@ -273,8 +272,7 @@ and suggest that awake SWR events influence activity widely
 throughout the brain. Importantly, this influence is likely strongest during
 early learning; once tasks are well-learned, SWR rates drop.
 
-2. Communication subspace
-
+\paragraph*{Communication subspace}
 Other evidence indicates that firing rates alone do not determine information 
 transmission. The core idea is that the dynamics of a large neural population
 is sometimes best understood as a trajectory in a state-space, where each point 
@@ -301,8 +299,7 @@ account for ventral striatal representations. The specific dimensions are
 suggestive that communication between these regions occurs in a specialized
 neuronal subspace.
 
-3. Central broadcast
-
+\paragraph*{Central broadcast}
 Neuromodulators may be central to coordination, because they have the potential
 to dramatically reconfigure circuits and change their dynamics across the brain.
 They are usually located in central locations in the brain and send projections
@@ -339,10 +336,10 @@ The novel signal processing research we propose herein involves bridging this ga
 \section*{Topic 4: Co-local memory storage and computation}
 
 \subsection{Computer Science}
-Data transferring is usually the bottleneck of data-centric computation systems.
+Data transmission is usually the bottleneck of data-centric computation systems.
 As the advance of processors, the speed gap between processors and memory
 storage continues increasing. Co-locating memory storage and computation helps
-to avoid data transferring from being the bottleneck.
+to avoid data transmission from being the bottleneck.
 
 At a small scale, there are attempts of co-locating computation in disks or RAM
 to achieve better energy efficiency and reduce data traffic to improve
@@ -373,7 +370,7 @@ commodity hardware.
 %\section*{References}
 %\addcontentsline{toc}{section}{References}
 \bibliographystyle{abbrv}
-\bibliography{NICP}
+\bibliography{NICE}
 
 \end{document}
 
